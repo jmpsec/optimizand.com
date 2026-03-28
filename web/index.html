@@ -58,6 +58,15 @@
         --line: #263f66;
         --cyan: #37d9ff;
         --blue: #4d79ff;
+        --space-1: 8px;
+        --space-2: 10px;
+        --space-3: 12px;
+        --space-4: 14px;
+        --space-5: 16px;
+        --radius-s: 10px;
+        --radius-m: 12px;
+        --radius-l: 14px;
+        --radius-xl: 16px;
       }
 
       * {
@@ -224,6 +233,7 @@
         color: #7de9ff;
         text-decoration: none;
         font-weight: 600;
+        line-height: 1.35;
       }
 
       .links a:hover {
@@ -243,16 +253,81 @@
 
       @media (max-width: 640px) {
         main {
-          margin-top: 14px;
+          width: min(1080px, 95vw);
+          margin-top: 12px;
+          margin-bottom: 20px;
         }
 
         .hero {
-          padding: 16px;
+          border-radius: var(--radius-xl);
+          padding: var(--space-4);
+        }
+
+        .hero-top {
+          align-items: flex-start;
+          gap: var(--space-2);
+        }
+
+        h1 {
+          font-size: 1.38rem;
+          line-height: 1.15;
+        }
+
+        .subtitle {
+          margin-bottom: 12px;
+          font-size: 0.92rem;
         }
 
         .brand-badge {
-          width: 48px;
-          height: 48px;
+          width: 42px;
+          height: 42px;
+          padding: 6px;
+        }
+
+        .actions {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: var(--space-1);
+        }
+
+        .btn {
+          width: 100%;
+          text-align: center;
+          padding: var(--space-3) var(--space-4);
+        }
+
+        .sections {
+          margin-top: 12px;
+          gap: var(--space-2);
+        }
+
+        .section {
+          border-radius: var(--radius-l);
+          padding: var(--space-3);
+        }
+
+        .section-title {
+          margin-bottom: 8px;
+        }
+
+        .grid {
+          grid-template-columns: 1fr;
+          gap: var(--space-1);
+        }
+
+        .card {
+          border-radius: var(--radius-m);
+          padding: var(--space-2);
+        }
+
+        .links {
+          gap: var(--space-1);
+        }
+
+        footer {
+          margin-top: 10px;
+          border-radius: var(--radius-s);
+          padding: calc(var(--space-2) - 1px) var(--space-2);
         }
       }
     </style>
@@ -264,7 +339,7 @@
     <main>
       <section class="hero">
         <div class="hero-top">
-          <img class="brand-badge" src="logo-only.png" alt="OptimizAND">
+          <img class="brand-badge" src="logo.png" alt="OptimizAND">
           <h1>OptimizAND Network Hub</h1>
         </div>
         <p class="subtitle">
