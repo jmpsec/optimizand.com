@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css" integrity="sha512-SbiR/eusphKoMVVXysTKG/7VseWii+Y3FdHrt0EpKgpToZeemhqHeZeLWLhJutz/2ut2Vw1uQEj2MbRF+TVBUA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js" integrity="sha512-Qlv6VSKh1gDKGoJbnyA5RMXYcvnpIqhO++MhIM2fStMcGT9i2T//tSwYFlcyoRRDcDZ+TYHpH8azBBCyhpSeqw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+      .container-card {
+        position: relative;
+        text-align: center;
+        color: black;
+        height: 295px;
+        width: 470px;
+      }
+
+      .container-img {
+        border-radius: 25px;
+      }
+
+      .card-text {
+        position: absolute;
+        left: 40px;
+      }
+
+      #text-name {
+        top: 100px;
+      }
+
+      #text-home1 {
+        top: 120px;
+      }
+
+      #text-home2 {
+        top: 160px;
+      }
+
+      #text-currency {
+        top: 180px;
+      }
+
+      #text-iban {
+        top: 200px;
+      }
+
+      #text-swift {
+        top: 220px;
+      }
+
+      #text-cliente {
+        top: 95px;
+      }
+
+      #text-titular {
+        top: 117px;
+      }
+
+      #text-home3 {
+        top: 182px;
+      }
+
+      #img-logo {
+        width: 10%;
+      }
+
+      body {
+        background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(49,128,246,0.6419161414565826) 100%);
+      }
+
+      input[type="text"],
+      #parroquia,
+      #currency,
+      #bank {
+        background-color: #dfeafd;
+      }
+
+      .bank-only {
+        display: none;
+      }
+
+      .bank-ca .ca-mora-only,
+      .bank-mora .ca-mora-only,
+      .bank-and .and-only {
+        display: block;
+      }
+
+      .bank-ca .and-only,
+      .bank-mora .and-only,
+      .bank-and .ca-mora-only {
+        display: none;
+      }
+
+      .and-only-label {
+        display: none;
+      }
+
+      .bank-and .and-only-label {
+        display: inline;
+      }
+
+      .bank-and .ca-mora-label {
+        display: none;
+      }
+    </style>
+  </head>
+  <body class="bank-ca">
+    <div class="container mt-5">
+      <h1 class="mb-4 d-flex align-items-center justify-content-center">
+        <img id="img-logo" src="logo-only.png" alt="Logo" /> Generador Tarjeta IBAN
+      </h1>
+      <form>
+        <div class="mb-3">
+          <label for="bank" class="form-label">Banco</label>
+          <select class="form-select" id="bank">
+            <option value="ca" selected>Creand (Credit Andorra)</option>
+            <option value="and">Andbank</option>
+            <option value="mora">MoraBanc</option>
+          </select>
+        </div>
+
+        <div class="mb-3 bank-only and-only">
+          <label for="cliente" class="form-label">Numero de Cliente</label>
+          <input type="text" class="form-control" id="cliente" value="123456.001.000">
+        </div>
+
+        <div class="mb-3 bank-only and-only">
+          <label for="titular" class="form-label">Titular</label>
+          <input type="text" class="form-control" id="titular">
+        </div>
+
+        <div class="mb-3 bank-only ca-mora-only">
+          <label for="name" class="form-label">Nombre Completo</label>
+          <input type="text" class="form-control" id="name">
+        </div>
+
+        <div class="mb-3">
+          <label for="home" class="form-label">Direccion</label>
+          <input type="text" class="form-control" id="home">
+        </div>
+
+        <div class="mb-3">
+          <label for="parroquia" class="form-label">Parroquia</label>
+          <select class="form-select" id="parroquia">
+            <option value="AD100 CANILLO">AD100 CANILLO</option>
+            <option value="AD200 ENCAMP">AD200 ENCAMP</option>
+            <option value="AD300 ORDINO">AD300 ORDINO</option>
+            <option value="AD400 LA MASSANA">AD400 LA MASSANA</option>
+            <option value="AD500 ANDORRA LA VELLA">AD500 ANDORRA LA VELLA</option>
+            <option value="AD600 SANT JULIA DE LORIA">AD600 SANT JULIA DE LORIA</option>
+            <option selected value="AD700 ESCALDES-ENGORDANY">AD700 ESCALDES-ENGORDANY</option>
+          </select>
+        </div>
+
+        <div class="mb-3 bank-only ca-mora-only">
+          <label for="currency" class="form-label">Moneda</label>
+          <select class="form-select" id="currency">
+            <option value="EUR">EUR</option>
+            <option value="USD">USD</option>
+            <option value="GBP">GBP</option>
+            <option value="RUB">RUB</option>
+            <option value="CNY">CNY</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="iban" class="form-label">IBAN</label>
+          <input type="text" class="form-control" id="iban">
+        </div>
+
+        <div class="mb-3">
+          <label for="swift" class="form-label">
+            <span class="ca-mora-label">SWIFT</span>
+            <span class="and-only-label">BIC</span>
+          </label>
+          <input type="text" class="form-control" id="swift" value="CRDAADAD">
+        </div>
+
+        <button type="button" class="btn btn-primary" onClick="refreshCard();"><i class="fas fa-retweet"></i> Generar</button>
+        <button type="button" class="btn btn-success" onClick="downloadCard();"><i class="fa-solid fa-download"></i> Descargar</button>
+      </form>
+    </div>
+
+    <div class="container mt-5 container-card">
+      <div id="iban-card" style="background-color: #11ffee00;">
+        <img id="bank-image" class="container-img" src="Creand.png" alt="Plantilla banco" style="width:100%;">
+
+        <div id="text-name" class="card-text bank-only ca-mora-only">NAME SURNAME</div>
+        <div id="text-home1" class="card-text">CALLE STREET 5, 1-2</div>
+        <div id="text-home2" class="card-text">AD700 ENGORDANY</div>
+        <div id="text-currency" class="card-text bank-only ca-mora-only">MONEDA: EUR</div>
+        <div id="text-iban" class="card-text">IBAN: ADXXXXXXXXXXXXXXXXXXXXXX</div>
+        <div id="text-swift" class="card-text">SWIFT: CRDAADAD</div>
+
+        <div id="text-cliente" class="card-text bank-only and-only">123456.001.000</div>
+        <div id="text-titular" class="card-text bank-only and-only">NAME SURNAME</div>
+        <div id="text-home3" class="card-text bank-only and-only">AD700 ENGORDANY</div>
+      </div>
+    </div>
+
+    <script>
+      const bankSettings = {
+        ca: {
+          image: "Creand.png",
+          download: "creand.png",
+          swiftLabel: "SWIFT",
+          swiftDefault: "CRDAADAD"
+        },
+        and: {
+          image: "Andbank.png",
+          download: "andbank.png",
+          swiftLabel: "BIC",
+          swiftDefault: "BACAADAD"
+        },
+        mora: {
+          image: "MoraBanc.png",
+          download: "mora-banc.png",
+          swiftLabel: "SWIFT",
+          swiftDefault: "BINAADAD"
+        }
+      };
+
+      function activeBank() {
+        return document.querySelector("#bank").value;
+      }
+
+      function applyBank() {
+        const bank = activeBank();
+        const config = bankSettings[bank];
+
+        document.body.classList.remove("bank-ca", "bank-and", "bank-mora");
+        document.body.classList.add("bank-" + bank);
+
+        const swiftInput = document.querySelector("#swift");
+        if (!swiftInput.value.trim()) {
+          swiftInput.value = config.swiftDefault;
+        }
+
+        document.querySelector("#bank-image").src = config.image;
+        document.querySelector("#text-swift").innerText = config.swiftLabel + ": " + swiftInput.value.toUpperCase();
+      }
+
+      function refreshCard() {
+        const config = bankSettings[activeBank()];
+
+        document.querySelector("#text-name").innerText = document.querySelector("#name").value.toUpperCase();
+        document.querySelector("#text-cliente").innerText = document.querySelector("#cliente").value.toUpperCase();
+        document.querySelector("#text-titular").innerText = document.querySelector("#titular").value.toUpperCase();
+
+        document.querySelector("#text-home1").innerText = document.querySelector("#home").value.toUpperCase();
+        document.querySelector("#text-home2").innerText = document.querySelector("#parroquia").value.toUpperCase();
+        document.querySelector("#text-home3").innerText = document.querySelector("#parroquia").value.toUpperCase();
+
+        document.querySelector("#text-currency").innerText = "MONEDA: " + document.querySelector("#currency").value.toUpperCase();
+        document.querySelector("#text-iban").innerText = "IBAN: " + document.querySelector("#iban").value.toUpperCase();
+        document.querySelector("#text-swift").innerText = config.swiftLabel + ": " + document.querySelector("#swift").value.toUpperCase();
+      }
+
+      function downloadCard() {
+        const config = bankSettings[activeBank()];
+        html2canvas(document.querySelector("#iban-card")).then(canvas => {
+          canvas.toBlob(blob => {
+            window.saveAs(blob, config.download);
+          });
+        });
+      }
+
+      document.querySelector("#bank").addEventListener("change", () => {
+        const config = bankSettings[activeBank()];
+        document.querySelector("#swift").value = config.swiftDefault;
+        applyBank();
+        refreshCard();
+      });
+
+      applyBank();
+      refreshCard();
+    </script>
+  </body>
+</html>
