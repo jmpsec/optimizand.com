@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta property="og:title" content="OptimizAND">
+    <meta property="og:description" content="Optimizando procesos en 🇦🇩">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="/logo.png">
+    <meta property="og:url" content="https://optimizand.com">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <style>
+      body {
+        background: #000;
+        background-size: cover;
+        margin: 0px;
+        height: 100%;
+      }
+      #container-site {
+        height: 100%;
+        position:absolute;
+        top:0px;
+        right:0px;
+        bottom:0px;
+        left:0px;
+      }
+      img {
+        position: absolute;
+        margin: auto;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border: 2px solid black;
+        border-bottom: 4px solid black;
+        border-radius: 20px;
+        box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.8);
+        transition: all 200ms ease-out;
+        background-color: #ffffff;
+        height: 18%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container-site"></div>
+    <img src="logo.png" alt="OptimizAND">
+  </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.152.2/three.min.js" integrity="sha512-R7eFJsc3NlvsTn5hdD/Xvi6FwpFGAoGOa2nBNU89DXAZzXgQQrfhgHVpm5Kh7H9EuCU3Ymexph9z4IiHrq977g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.net.min.js" integrity="sha512-lH/5/byfwH0bqySiiSINJJoEoWFEBGKgOwsnAlZZPviNJI1DDBVXjPHgEkM0fowfOp6NMBAN4ROAYjx+uEkEjQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+      VANTA.NET({
+        el: "#container-site",
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        scale: 1.00,
+        scaleMobile: 1.00,
+        color: 0xffffff,
+        backgroundColor: 0x3180f6
+      })
+    </script>
+</html>
