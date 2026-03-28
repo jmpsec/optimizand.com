@@ -114,7 +114,7 @@ input[type="text"], #parroquia, #currency {
     </div>
     <div class="container mt-5 container-card">
       <div id="credit-andorra-card" style="background-color: #11ffee00;">
-        <img class="container-img" src="CreditAndorra.png" alt="Credit Andorra" style="width:100%;">
+        <img class="container-img" src="MoraBanc.png" alt="Mora Banc" style="width:100%;">
         <div id="text-name">NAME SURNAME</div>
         <div id="text-home1">CALLE STREET 5, 1-2</div>
         <div id="text-home2">AD700 ENGORDANY</div>
@@ -135,7 +135,7 @@ input[type="text"], #parroquia, #currency {
       function download_card() {
         html2canvas(document.querySelector("#credit-andorra-card")).then(canvas => {
           canvas.toBlob(function(blob) {
-            window.saveAs(blob, 'credit-andorra.png');
+            window.saveAs(blob, 'mora-banc.png');
           });
         });
       }
