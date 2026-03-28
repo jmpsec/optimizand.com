@@ -1,66 +1,347 @@
 <!DOCTYPE html>
 <html lang="es">
   <head>
-    <meta property="og:title" content="OptimizAND">
-    <meta property="og:description" content="Optimizando procesos en 🇦🇩">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="/logo.png">
-    <meta property="og:url" content="https://optimizand.com">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OptimizAND | Recursos y Enlaces Utiles para Vivir en Andorra</title>
+    <meta name="description" content="OptimizAND centraliza herramientas y enlaces oficiales utiles para residentes en Andorra: tramites, movilidad, salud, suministros, banca y generador de tarjeta IBAN.">
+    <meta name="robots" content="index,follow,max-image-preview:large">
+    <meta name="theme-color" content="#0a1427">
+    <link rel="canonical" href="https://optimizand.com/">
+    <meta property="og:locale" content="es_AD">
+    <meta property="og:site_name" content="OptimizAND">
+    <meta property="og:title" content="OptimizAND | Recursos y Enlaces Utiles para Vivir en Andorra">
+    <meta property="og:description" content="Herramientas y enlaces oficiales para residentes en Andorra, incluyendo el generador de tarjeta IBAN.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://optimizand.com/logo.png">
+    <meta property="og:image:alt" content="Logo de OptimizAND">
+    <meta property="og:url" content="https://optimizand.com/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="OptimizAND | Recursos y Enlaces Utiles para Vivir en Andorra">
+    <meta name="twitter:description" content="Hub de enlaces y herramientas utiles para la vida diaria en Andorra.">
+    <meta name="twitter:image" content="https://optimizand.com/logo.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "name": "OptimizAND",
+            "url": "https://optimizand.com/",
+            "inLanguage": "es",
+            "description": "Hub de herramientas y enlaces utiles para vivir en Andorra."
+          },
+          {
+            "@type": "Organization",
+            "name": "OptimizAND",
+            "url": "https://optimizand.com/",
+            "logo": "https://optimizand.com/logo.png"
+          }
+        ]
+      }
+    </script>
     <style>
+      :root {
+        --bg: #070c16;
+        --panel: rgba(11, 21, 40, 0.85);
+        --panel-2: rgba(13, 25, 47, 0.72);
+        --text: #edf4ff;
+        --muted: #9db1cf;
+        --line: #263f66;
+        --cyan: #37d9ff;
+        --blue: #4d79ff;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
       body {
-        background: #000;
-        background-size: cover;
-        margin: 0px;
-        height: 100%;
+        margin: 0;
+        min-height: 100vh;
+        font-family: "Manrope", "Segoe UI", sans-serif;
+        color: var(--text);
+        background: radial-gradient(circle at 12% 12%, #0f2d62 0%, #0a1427 36%, #070c16 78%);
+        overflow-x: hidden;
       }
-      #container-site {
-        height: 100%;
-        position:absolute;
-        top:0px;
-        right:0px;
-        bottom:0px;
-        left:0px;
+
+      .bg-grid {
+        position: fixed;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(76, 146, 255, 0.08) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(76, 146, 255, 0.08) 1px, transparent 1px);
+        background-size: 44px 44px;
+        mask-image: radial-gradient(circle at center, black 52%, transparent 95%);
+        pointer-events: none;
+        z-index: 0;
       }
-      img {
-        position: absolute;
-        margin: auto;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        border: 2px solid black;
-        border-bottom: 4px solid black;
-        border-radius: 20px;
-        box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.8);
-        transition: all 200ms ease-out;
-        background-color: #ffffff;
-        height: 18%;
+
+      .bg-glow {
+        position: fixed;
+        width: 540px;
+        height: 540px;
+        right: -180px;
+        top: -170px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(55, 217, 255, 0.2) 0%, rgba(55, 217, 255, 0) 72%);
+        filter: blur(8px);
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      main {
+        position: relative;
+        z-index: 1;
+        width: min(1080px, 94vw);
+        margin: 28px auto 36px;
+      }
+
+      .hero {
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        background: linear-gradient(140deg, var(--panel), rgba(10, 19, 36, 0.74));
+        padding: 24px;
+        box-shadow: 0 18px 42px rgba(0, 0, 0, 0.36);
+      }
+
+      .hero-top {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .brand-badge {
+        width: 56px;
+        height: 56px;
+        border-radius: 14px;
+        padding: 8px;
+        background: rgba(6, 14, 29, 0.9);
+        border: 1px solid #2e4f79;
+      }
+
+      h1 {
+        margin: 0;
+        font-family: "Chakra Petch", "Trebuchet MS", sans-serif;
+        font-size: clamp(1.5rem, 3.2vw, 2.4rem);
+        letter-spacing: 0.02em;
+      }
+
+      .subtitle {
+        margin: 10px 0 18px;
+        color: var(--muted);
+        max-width: 70ch;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .btn {
+        text-decoration: none;
+        border-radius: 999px;
+        padding: 10px 16px;
+        font-weight: 700;
+        border: 1px solid transparent;
+        transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+      }
+
+      .btn:hover {
+        transform: translateY(-1px);
+      }
+
+      .btn-primary {
+        background: linear-gradient(130deg, var(--cyan), #2fa9ff);
+        color: #07172d;
+        box-shadow: 0 0 0 1px rgba(55, 217, 255, 0.2), 0 8px 20px rgba(17, 155, 255, 0.28);
+      }
+
+      .btn-secondary {
+        color: var(--text);
+        background: rgba(9, 20, 39, 0.62);
+        border-color: #345680;
+      }
+
+      .sections {
+        margin-top: 20px;
+        display: grid;
+        gap: 14px;
+      }
+
+      .section {
+        border-radius: 18px;
+        border: 1px solid #253d64;
+        background: var(--panel-2);
+        padding: 14px;
+      }
+
+      .section-title {
+        margin: 0 0 10px;
+        font-size: 1.06rem;
+        font-family: "Chakra Petch", "Trebuchet MS", sans-serif;
+        letter-spacing: 0.03em;
+        color: #cfe7ff;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 10px;
+      }
+
+      .card {
+        background: rgba(8, 17, 32, 0.72);
+        border: 1px solid #28466f;
+        border-radius: 14px;
+        padding: 12px;
+      }
+
+      .card h3 {
+        margin: 0 0 8px;
+        font-size: 0.99rem;
+        color: #d8ebff;
+      }
+
+      .links {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 6px;
+      }
+
+      .links a {
+        color: #7de9ff;
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .links a:hover {
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+
+      footer {
+        margin-top: 14px;
+        border-radius: 12px;
+        border: 1px solid #2a476f;
+        background: rgba(8, 16, 31, 0.72);
+        padding: 10px 12px;
+        color: var(--muted);
+        font-size: 0.88rem;
+      }
+
+      @media (max-width: 640px) {
+        main {
+          margin-top: 14px;
+        }
+
+        .hero {
+          padding: 16px;
+        }
+
+        .brand-badge {
+          width: 48px;
+          height: 48px;
+        }
       }
     </style>
   </head>
   <body>
-    <div id="container-site"></div>
-    <img src="logo.png" alt="OptimizAND">
+    <div class="bg-grid"></div>
+    <div class="bg-glow"></div>
+
+    <main>
+      <section class="hero">
+        <div class="hero-top">
+          <img class="brand-badge" src="logo-only.png" alt="OptimizAND">
+          <h1>OptimizAND Network Hub</h1>
+        </div>
+        <p class="subtitle">
+          Herramientas utiles y accesos oficiales para residentes en Andorra, con foco en velocidad y claridad.
+        </p>
+        <div class="actions">
+          <a class="btn btn-primary" href="/iban.html">Generador Tarjeta IBAN</a>
+          <a class="btn btn-secondary" href="https://www.govern.ad/" target="_blank" rel="noopener noreferrer">Portal Govern.ad</a>
+        </div>
+      </section>
+
+      <div class="sections">
+        <section class="section">
+          <h2 class="section-title">Administracion y tramites</h2>
+          <div class="grid">
+            <article class="card">
+              <h3>Gobierno</h3>
+              <ul class="links">
+                <li><a href="https://www.govern.ad/" target="_blank" rel="noopener noreferrer">Govern d'Andorra</a></li>
+                <li><a href="https://www.bopa.ad/" target="_blank" rel="noopener noreferrer">BOPA</a></li>
+              </ul>
+            </article>
+            <article class="card">
+              <h3>Salud y cotizacion</h3>
+              <ul class="links">
+                <li><a href="https://www.cass.ad/" target="_blank" rel="noopener noreferrer">CASS</a></li>
+                <li><a href="https://www.saas.ad/" target="_blank" rel="noopener noreferrer">SAAS</a></li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2 class="section-title">Movilidad y vida diaria</h2>
+          <div class="grid">
+            <article class="card">
+              <h3>Carreteras y bus</h3>
+              <ul class="links">
+                <li><a href="https://www.mobilitat.ad/" target="_blank" rel="noopener noreferrer">Mobilitat (estado vias)</a></li>
+                <li><a href="https://bus.ad/" target="_blank" rel="noopener noreferrer">Bus Andorra</a></li>
+              </ul>
+            </article>
+            <article class="card">
+              <h3>Meteo y nieve</h3>
+              <ul class="links">
+                <li><a href="https://www.meteo.ad/" target="_blank" rel="noopener noreferrer">Meteo.ad</a></li>
+                <li><a href="https://www.visitandorra.com/" target="_blank" rel="noopener noreferrer">Visit Andorra</a></li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2 class="section-title">Suministros y conectividad</h2>
+          <div class="grid">
+            <article class="card">
+              <h3>Hogar</h3>
+              <ul class="links">
+                <li><a href="https://www.feda.ad/" target="_blank" rel="noopener noreferrer">FEDA (electricidad)</a></li>
+                <li><a href="https://www.andorratelecom.ad/" target="_blank" rel="noopener noreferrer">Andorra Telecom</a></li>
+              </ul>
+            </article>
+            <article class="card">
+              <h3>Banca</h3>
+              <ul class="links">
+                <li><a href="https://www.creand.ad/" target="_blank" rel="noopener noreferrer">Creand</a></li>
+                <li><a href="https://www.andbank.com/" target="_blank" rel="noopener noreferrer">Andbank</a></li>
+                <li><a href="https://www.morabanc.ad/" target="_blank" rel="noopener noreferrer">MoraBanc</a></li>
+              </ul>
+            </article>
+          </div>
+        </section>
+      </div>
+
+      <footer>
+        Algunos portales externos pueden requerir certificado digital, usuario registrado o JavaScript habilitado.
+      </footer>
+    </main>
   </body>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.152.2/three.min.js" integrity="sha512-R7eFJsc3NlvsTn5hdD/Xvi6FwpFGAoGOa2nBNU89DXAZzXgQQrfhgHVpm5Kh7H9EuCU3Ymexph9z4IiHrq977g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.net.min.js" integrity="sha512-lH/5/byfwH0bqySiiSINJJoEoWFEBGKgOwsnAlZZPviNJI1DDBVXjPHgEkM0fowfOp6NMBAN4ROAYjx+uEkEjQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script>
-      VANTA.NET({
-        el: "#container-site",
-        mouseControls: true,
-        touchControls: true,
-        gyroControls: false,
-        scale: 1.00,
-        scaleMobile: 1.00,
-        color: 0xffffff,
-        backgroundColor: 0x3180f6
-      })
-    </script>
 </html>

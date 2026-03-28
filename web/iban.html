@@ -8,77 +8,172 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css" integrity="sha512-SbiR/eusphKoMVVXysTKG/7VseWii+Y3FdHrt0EpKgpToZeemhqHeZeLWLhJutz/2ut2Vw1uQEj2MbRF+TVBUA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js" integrity="sha512-Qlv6VSKh1gDKGoJbnyA5RMXYcvnpIqhO++MhIM2fStMcGT9i2T//tSwYFlcyoRRDcDZ+TYHpH8azBBCyhpSeqw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>Generador Tarjeta IBAN</title>
     <style>
-      .container-card {
-        position: relative;
-        text-align: center;
-        color: black;
-        height: 295px;
-        width: 470px;
+      :root {
+        --bg: #070c16;
+        --panel: rgba(11, 21, 40, 0.85);
+        --panel-2: rgba(13, 25, 47, 0.72);
+        --text: #edf4ff;
+        --muted: #9db1cf;
+        --line: #263f66;
+        --cyan: #37d9ff;
+        --blue: #4d79ff;
       }
 
-      .container-img {
-        border-radius: 25px;
-      }
-
-      .card-text {
-        position: absolute;
-        left: 40px;
-      }
-
-      #text-name {
-        top: 100px;
-      }
-
-      #text-home1 {
-        top: 120px;
-      }
-
-      #text-home2 {
-        top: 160px;
-      }
-
-      #text-currency {
-        top: 180px;
-      }
-
-      #text-iban {
-        top: 200px;
-      }
-
-      #text-swift {
-        top: 220px;
-      }
-
-      #text-cliente {
-        top: 95px;
-      }
-
-      #text-titular {
-        top: 117px;
-      }
-
-      #text-home3 {
-        top: 182px;
-      }
-
-      #img-logo {
-        width: 10%;
+      * {
+        box-sizing: border-box;
       }
 
       body {
-        background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(49,128,246,0.6419161414565826) 100%);
+        margin: 0;
+        min-height: 100vh;
+        font-family: "Manrope", "Segoe UI", sans-serif;
+        color: var(--text);
+        background: radial-gradient(circle at 12% 12%, #0f2d62 0%, #0a1427 36%, #070c16 78%);
       }
 
-      input[type="text"],
-      #parroquia,
-      #currency,
-      #bank {
-        background-color: #dfeafd;
+      .bg-grid {
+        position: fixed;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(76, 146, 255, 0.08) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(76, 146, 255, 0.08) 1px, transparent 1px);
+        background-size: 44px 44px;
+        mask-image: radial-gradient(circle at center, black 52%, transparent 95%);
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .bg-glow {
+        position: fixed;
+        width: 520px;
+        height: 520px;
+        right: -160px;
+        top: -160px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(55, 217, 255, 0.22) 0%, rgba(55, 217, 255, 0) 70%);
+        filter: blur(8px);
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .wrap {
+        position: relative;
+        z-index: 1;
+        width: min(1120px, 94vw);
+        margin: 24px auto 32px;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 14px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        color: var(--text);
+      }
+
+      .brand img {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        padding: 7px;
+        background: rgba(6, 14, 29, 0.9);
+        border: 1px solid #2e4f79;
+      }
+
+      .brand strong {
+        font-family: "Chakra Petch", "Trebuchet MS", sans-serif;
+        font-size: 1.12rem;
+        letter-spacing: 0.03em;
+      }
+
+      .back-link {
+        color: #7de9ff;
+        text-decoration: none;
+        font-weight: 700;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: minmax(320px, 1.1fr) minmax(320px, 1fr);
+        gap: 14px;
+        align-items: start;
+      }
+
+      .panel {
+        border-radius: 18px;
+        border: 1px solid #253d64;
+        background: var(--panel);
+        box-shadow: 0 16px 36px rgba(0, 0, 0, 0.32);
+      }
+
+      .form-panel {
+        padding: 16px;
+      }
+
+      h1 {
+        margin: 0 0 6px;
+        font-family: "Chakra Petch", "Trebuchet MS", sans-serif;
+        font-size: clamp(1.35rem, 2.5vw, 1.9rem);
+      }
+
+      .subtitle {
+        margin: 0 0 14px;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .field-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .field,
+      .field-full {
+        display: grid;
+        gap: 5px;
+      }
+
+      .field-full {
+        grid-column: 1 / -1;
+      }
+
+      label {
+        font-size: 0.86rem;
+        color: #cfe1fb;
+      }
+
+      input,
+      select {
+        width: 100%;
+        border-radius: 10px;
+        border: 1px solid #2f507e;
+        background: rgba(8, 18, 35, 0.88);
+        color: var(--text);
+        padding: 10px;
+        font: inherit;
+        outline: none;
+      }
+
+      input:focus,
+      select:focus {
+        border-color: #4ccfff;
+        box-shadow: 0 0 0 2px rgba(55, 217, 255, 0.2);
       }
 
       .bank-only {
@@ -88,7 +183,7 @@
       .bank-ca .ca-mora-only,
       .bank-mora .ca-mora-only,
       .bank-and .and-only {
-        display: block;
+        display: grid;
       }
 
       .bank-ca .and-only,
@@ -97,110 +192,226 @@
         display: none;
       }
 
-      .and-only-label {
+      .actions {
+        margin-top: 14px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .btn {
+        border: 1px solid transparent;
+        border-radius: 999px;
+        padding: 10px 14px;
+        font-weight: 700;
+        color: var(--text);
+        cursor: pointer;
+      }
+
+      .btn-primary {
+        background: linear-gradient(130deg, var(--cyan), #2fa9ff);
+        color: #07172d;
+      }
+
+      .btn-secondary {
+        background: rgba(9, 20, 39, 0.62);
+        border-color: #345680;
+      }
+
+      .hint {
+        margin-top: 10px;
+        color: var(--muted);
+        font-size: 0.84rem;
+      }
+
+      .preview-panel {
+        padding: 14px;
+        position: sticky;
+        top: 14px;
+      }
+
+      .preview-title {
+        margin: 0 0 10px;
+        font-size: 0.98rem;
+        color: #cfe7ff;
+        font-family: "Chakra Petch", "Trebuchet MS", sans-serif;
+      }
+
+      .container-card {
+        position: relative;
+        text-align: center;
+        color: #020814;
+        width: 470px;
+        max-width: 100%;
+        margin: 0 auto;
+      }
+
+      .container-img {
+        border-radius: 25px;
+        width: 100%;
+      }
+
+      .card-text {
+        position: absolute;
+        left: 40px;
+        font-family: "Chakra Petch", "Trebuchet MS", sans-serif;
+        font-size: 0.95rem;
+      }
+
+      #text-name { top: 100px; }
+      #text-home1 { top: 120px; }
+      #text-home2 { top: 160px; }
+      #text-currency { top: 180px; }
+      #text-iban { top: 200px; }
+      #text-swift { top: 220px; }
+      #text-cliente { top: 95px; }
+      #text-titular { top: 117px; }
+      #text-home3 { top: 182px; }
+
+      .bank-and .card-text {
+        font-size: 0.85rem;
+      }
+
+      .bank-and #text-home1 {
+        top: 141px;
+      }
+
+      .bank-and #text-home3 {
+        top: 161px;
+      }
+
+      .bank-and #text-home2 {
         display: none;
       }
 
-      .bank-and .and-only-label {
-        display: inline;
+      @media (max-width: 960px) {
+        .layout {
+          grid-template-columns: 1fr;
+        }
+
+        .preview-panel {
+          position: static;
+        }
       }
 
-      .bank-and .ca-mora-label {
-        display: none;
+      @media (max-width: 640px) {
+        .field-grid {
+          grid-template-columns: 1fr;
+        }
       }
     </style>
   </head>
   <body class="bank-ca">
-    <div class="container mt-5">
-      <h1 class="mb-4 d-flex align-items-center justify-content-center">
-        <img id="img-logo" src="logo-only.png" alt="Logo" /> Generador Tarjeta IBAN
-      </h1>
-      <form>
-        <div class="mb-3">
-          <label for="bank" class="form-label">Banco</label>
-          <select class="form-select" id="bank">
-            <option value="ca" selected>Creand (Credit Andorra)</option>
-            <option value="and">Andbank</option>
-            <option value="mora">MoraBanc</option>
-          </select>
-        </div>
+    <div class="bg-grid"></div>
+    <div class="bg-glow"></div>
 
-        <div class="mb-3 bank-only and-only">
-          <label for="cliente" class="form-label">Numero de Cliente</label>
-          <input type="text" class="form-control" id="cliente" value="123456.001.000">
-        </div>
+    <div class="wrap">
+      <div class="topbar">
+        <a class="brand" href="/">
+          <img src="logo-only.png" alt="OptimizAND">
+          <strong>OptimizAND</strong>
+        </a>
+        <a class="back-link" href="/">Volver al hub</a>
+      </div>
 
-        <div class="mb-3 bank-only and-only">
-          <label for="titular" class="form-label">Titular</label>
-          <input type="text" class="form-control" id="titular">
-        </div>
+      <div class="layout">
+        <section class="panel form-panel">
+          <h1>Generador Tarjeta IBAN</h1>
+          <p class="subtitle">Selecciona el banco, completa los datos y descarga la tarjeta en PNG.</p>
 
-        <div class="mb-3 bank-only ca-mora-only">
-          <label for="name" class="form-label">Nombre Completo</label>
-          <input type="text" class="form-control" id="name">
-        </div>
+          <form id="iban-form">
+            <div class="field-grid">
+              <div class="field field-full">
+                <label for="bank">Banco</label>
+                <select id="bank">
+                  <option value="ca" selected>Creand (Credit Andorra)</option>
+                  <option value="and">Andbank</option>
+                  <option value="mora">MoraBanc</option>
+                </select>
+              </div>
 
-        <div class="mb-3">
-          <label for="home" class="form-label">Direccion</label>
-          <input type="text" class="form-control" id="home">
-        </div>
+              <div class="field bank-only and-only">
+                <label for="cliente">Numero de Cliente</label>
+                <input type="text" id="cliente" value="123456.001.000" placeholder="123456.001.000">
+              </div>
 
-        <div class="mb-3">
-          <label for="parroquia" class="form-label">Parroquia</label>
-          <select class="form-select" id="parroquia">
-            <option value="AD100 CANILLO">AD100 CANILLO</option>
-            <option value="AD200 ENCAMP">AD200 ENCAMP</option>
-            <option value="AD300 ORDINO">AD300 ORDINO</option>
-            <option value="AD400 LA MASSANA">AD400 LA MASSANA</option>
-            <option value="AD500 ANDORRA LA VELLA">AD500 ANDORRA LA VELLA</option>
-            <option value="AD600 SANT JULIA DE LORIA">AD600 SANT JULIA DE LORIA</option>
-            <option selected value="AD700 ESCALDES-ENGORDANY">AD700 ESCALDES-ENGORDANY</option>
-          </select>
-        </div>
+              <div class="field bank-only and-only">
+                <label for="titular">Titular</label>
+                <input type="text" id="titular" placeholder="Nombre titular">
+              </div>
 
-        <div class="mb-3 bank-only ca-mora-only">
-          <label for="currency" class="form-label">Moneda</label>
-          <select class="form-select" id="currency">
-            <option value="EUR">EUR</option>
-            <option value="USD">USD</option>
-            <option value="GBP">GBP</option>
-            <option value="RUB">RUB</option>
-            <option value="CNY">CNY</option>
-          </select>
-        </div>
+              <div class="field field-full bank-only ca-mora-only">
+                <label for="name">Nombre Completo</label>
+                <input type="text" id="name" placeholder="Nombre y apellidos">
+              </div>
 
-        <div class="mb-3">
-          <label for="iban" class="form-label">IBAN</label>
-          <input type="text" class="form-control" id="iban">
-        </div>
+              <div class="field field-full">
+                <label for="home">Direccion</label>
+                <input type="text" id="home" placeholder="Calle, numero, piso">
+              </div>
 
-        <div class="mb-3">
-          <label for="swift" class="form-label">
-            <span class="ca-mora-label">SWIFT</span>
-            <span class="and-only-label">BIC</span>
-          </label>
-          <input type="text" class="form-control" id="swift" value="CRDAADAD">
-        </div>
+              <div class="field">
+                <label for="parroquia">Parroquia</label>
+                <select id="parroquia">
+                  <option value="AD100 CANILLO">AD100 CANILLO</option>
+                  <option value="AD200 ENCAMP">AD200 ENCAMP</option>
+                  <option value="AD300 ORDINO">AD300 ORDINO</option>
+                  <option value="AD400 LA MASSANA">AD400 LA MASSANA</option>
+                  <option value="AD500 ANDORRA LA VELLA">AD500 ANDORRA LA VELLA</option>
+                  <option value="AD600 SANT JULIA DE LORIA">AD600 SANT JULIA DE LORIA</option>
+                  <option value="AD700 ESCALDES-ENGORDANY" selected>AD700 ESCALDES-ENGORDANY</option>
+                </select>
+              </div>
 
-        <button type="button" class="btn btn-primary" onClick="refreshCard();"><i class="fas fa-retweet"></i> Generar</button>
-        <button type="button" class="btn btn-success" onClick="downloadCard();"><i class="fa-solid fa-download"></i> Descargar</button>
-      </form>
-    </div>
+              <div class="field bank-only ca-mora-only">
+                <label for="currency">Moneda</label>
+                <select id="currency">
+                  <option value="EUR">EUR</option>
+                  <option value="USD">USD</option>
+                  <option value="GBP">GBP</option>
+                  <option value="RUB">RUB</option>
+                  <option value="CNY">CNY</option>
+                </select>
+              </div>
 
-    <div class="container mt-5 container-card">
-      <div id="iban-card" style="background-color: #11ffee00;">
-        <img id="bank-image" class="container-img" src="Creand.png" alt="Plantilla banco" style="width:100%;">
+              <div class="field field-full">
+                <label for="iban">IBAN</label>
+                <input type="text" id="iban" placeholder="ADXXXXXXXXXXXXXXXXXXXXXX">
+              </div>
 
-        <div id="text-name" class="card-text bank-only ca-mora-only">NAME SURNAME</div>
-        <div id="text-home1" class="card-text">CALLE STREET 5, 1-2</div>
-        <div id="text-home2" class="card-text">AD700 ENGORDANY</div>
-        <div id="text-currency" class="card-text bank-only ca-mora-only">MONEDA: EUR</div>
-        <div id="text-iban" class="card-text">IBAN: ADXXXXXXXXXXXXXXXXXXXXXX</div>
-        <div id="text-swift" class="card-text">SWIFT: CRDAADAD</div>
+              <div class="field field-full">
+                <label id="swift-label" for="swift">SWIFT</label>
+                <input type="text" id="swift" value="CRDAADAD" placeholder="Codigo bancario">
+              </div>
+            </div>
 
-        <div id="text-cliente" class="card-text bank-only and-only">123456.001.000</div>
-        <div id="text-titular" class="card-text bank-only and-only">NAME SURNAME</div>
-        <div id="text-home3" class="card-text bank-only and-only">AD700 ENGORDANY</div>
+            <div class="actions">
+              <button class="btn btn-primary" type="button" id="download-btn">Descargar PNG</button>
+              <button class="btn btn-secondary" type="button" id="refresh-btn">Actualizar Vista</button>
+            </div>
+            <p class="hint">La vista previa se actualiza automaticamente mientras escribes.</p>
+          </form>
+        </section>
+
+        <section class="panel preview-panel">
+          <h2 class="preview-title">Vista previa</h2>
+          <div class="container-card">
+            <div id="iban-card" style="background-color: transparent;">
+              <img id="bank-image" class="container-img" src="Creand.png" alt="Plantilla banco">
+
+              <div id="text-name" class="card-text bank-only ca-mora-only">NAME SURNAME</div>
+              <div id="text-home1" class="card-text">CALLE STREET 5, 1-2</div>
+              <div id="text-home2" class="card-text">AD700 ENGORDANY</div>
+              <div id="text-currency" class="card-text bank-only ca-mora-only">MONEDA: EUR</div>
+              <div id="text-iban" class="card-text">IBAN: ADXXXXXXXXXXXXXXXXXXXXXX</div>
+              <div id="text-swift" class="card-text">SWIFT: CRDAADAD</div>
+
+              <div id="text-cliente" class="card-text bank-only and-only">123456.001.000</div>
+              <div id="text-titular" class="card-text bank-only and-only">NAME SURNAME</div>
+              <div id="text-home3" class="card-text bank-only and-only">AD700 ENGORDANY</div>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
 
@@ -226,6 +437,10 @@
         }
       };
 
+      function value(id) {
+        return document.querySelector(id).value.trim().toUpperCase();
+      }
+
       function activeBank() {
         return document.querySelector("#bank").value;
       }
@@ -233,38 +448,38 @@
       function applyBank() {
         const bank = activeBank();
         const config = bankSettings[bank];
+        const swiftInput = document.querySelector("#swift");
 
         document.body.classList.remove("bank-ca", "bank-and", "bank-mora");
         document.body.classList.add("bank-" + bank);
 
-        const swiftInput = document.querySelector("#swift");
         if (!swiftInput.value.trim()) {
           swiftInput.value = config.swiftDefault;
         }
 
+        document.querySelector("#swift-label").innerText = config.swiftLabel;
         document.querySelector("#bank-image").src = config.image;
-        document.querySelector("#text-swift").innerText = config.swiftLabel + ": " + swiftInput.value.toUpperCase();
       }
 
       function refreshCard() {
         const config = bankSettings[activeBank()];
 
-        document.querySelector("#text-name").innerText = document.querySelector("#name").value.toUpperCase();
-        document.querySelector("#text-cliente").innerText = document.querySelector("#cliente").value.toUpperCase();
-        document.querySelector("#text-titular").innerText = document.querySelector("#titular").value.toUpperCase();
+        document.querySelector("#text-name").innerText = value("#name") || "NAME SURNAME";
+        document.querySelector("#text-cliente").innerText = value("#cliente") || "123456.001.000";
+        document.querySelector("#text-titular").innerText = value("#titular") || "NAME SURNAME";
 
-        document.querySelector("#text-home1").innerText = document.querySelector("#home").value.toUpperCase();
-        document.querySelector("#text-home2").innerText = document.querySelector("#parroquia").value.toUpperCase();
-        document.querySelector("#text-home3").innerText = document.querySelector("#parroquia").value.toUpperCase();
+        document.querySelector("#text-home1").innerText = value("#home") || "CALLE STREET 5, 1-2";
+        document.querySelector("#text-home2").innerText = value("#parroquia") || "AD700 ENGORDANY";
+        document.querySelector("#text-home3").innerText = value("#parroquia") || "AD700 ENGORDANY";
 
-        document.querySelector("#text-currency").innerText = "MONEDA: " + document.querySelector("#currency").value.toUpperCase();
-        document.querySelector("#text-iban").innerText = "IBAN: " + document.querySelector("#iban").value.toUpperCase();
-        document.querySelector("#text-swift").innerText = config.swiftLabel + ": " + document.querySelector("#swift").value.toUpperCase();
+        document.querySelector("#text-currency").innerText = "MONEDA: " + (value("#currency") || "EUR");
+        document.querySelector("#text-iban").innerText = "IBAN: " + (value("#iban") || "ADXXXXXXXXXXXXXXXXXXXXXX");
+        document.querySelector("#text-swift").innerText = config.swiftLabel + ": " + (value("#swift") || config.swiftDefault);
       }
 
       function downloadCard() {
         const config = bankSettings[activeBank()];
-        html2canvas(document.querySelector("#iban-card")).then(canvas => {
+        html2canvas(document.querySelector("#iban-card"), { backgroundColor: null }).then(canvas => {
           canvas.toBlob(blob => {
             window.saveAs(blob, config.download);
           });
@@ -276,6 +491,14 @@
         document.querySelector("#swift").value = config.swiftDefault;
         applyBank();
         refreshCard();
+      });
+
+      document.querySelector("#refresh-btn").addEventListener("click", refreshCard);
+      document.querySelector("#download-btn").addEventListener("click", downloadCard);
+
+      document.querySelectorAll("#iban-form input, #iban-form select").forEach(el => {
+        el.addEventListener("input", refreshCard);
+        el.addEventListener("change", refreshCard);
       });
 
       applyBank();
