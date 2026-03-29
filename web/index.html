@@ -107,6 +107,32 @@
         z-index: 0;
       }
 
+      .bg-logo {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background-image: url("logo.png");
+        background-repeat: no-repeat;
+        background-position: center 54%;
+        background-size: min(52vw, 520px);
+        opacity: 0.12;
+        mix-blend-mode: screen;
+        filter: saturate(1.28) drop-shadow(0 0 30px rgba(60, 204, 255, 0.35));
+        animation: logoFloat 11s ease-in-out infinite alternate;
+      }
+
+      @keyframes logoFloat {
+        0% {
+          transform: translate3d(0, 0, 0) scale(1);
+          opacity: 0.1;
+        }
+        100% {
+          transform: translate3d(0, -10px, 0) scale(1.04);
+          opacity: 0.14;
+        }
+      }
+
       main {
         position: relative;
         z-index: 1;
@@ -209,14 +235,29 @@
       }
 
       .card {
+        position: relative;
         background: rgba(8, 17, 32, 0.72);
         border: 1px solid #28466f;
         border-radius: 14px;
         padding: 12px;
       }
 
+      .card::after {
+        content: "";
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 22px;
+        height: 22px;
+        border-radius: 7px;
+        background: rgba(8, 20, 39, 0.9) url("logo.png") center / 72% no-repeat;
+        border: 1px solid rgba(95, 210, 255, 0.45);
+        box-shadow: 0 0 10px rgba(55, 217, 255, 0.2);
+        opacity: 0.9;
+      }
+
       .card h3 {
-        margin: 0 0 8px;
+        margin: 0 28px 8px 0;
         font-size: 0.99rem;
         color: #d8ebff;
       }
@@ -251,7 +292,29 @@
         font-size: 0.88rem;
       }
 
+      .footer-attribution {
+        margin-top: 6px;
+        font-size: 0.84rem;
+      }
+
+      .footer-attribution a {
+        color: #7de9ff;
+        text-decoration: none;
+        font-weight: 700;
+      }
+
+      .footer-attribution a:hover {
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+
       @media (max-width: 640px) {
+        .bg-logo {
+          background-size: min(72vw, 360px);
+          background-position: center 60%;
+          opacity: 0.09;
+        }
+
         main {
           width: min(1080px, 95vw);
           margin-top: 12px;
@@ -320,6 +383,13 @@
           padding: var(--space-2);
         }
 
+        .card::after {
+          top: 8px;
+          right: 8px;
+          width: 20px;
+          height: 20px;
+        }
+
         .links {
           gap: var(--space-1);
         }
@@ -335,6 +405,7 @@
   <body>
     <div class="bg-grid"></div>
     <div class="bg-glow"></div>
+    <div class="bg-logo"></div>
 
     <main>
       <section class="hero">
@@ -347,7 +418,8 @@
         </p>
         <div class="actions">
           <a class="btn btn-primary" href="/iban.html">Generador Tarjeta IBAN</a>
-          <a class="btn btn-secondary" href="https://www.govern.ad/" target="_blank" rel="noopener noreferrer">Portal Govern.ad</a>
+          <a class="btn btn-secondary" href="https://www.e-tramits.ad/tramits/" target="_blank" rel="noopener noreferrer">e-Tramits Govern.ad</a>
+          <a class="btn btn-secondary" href="https://signatura.govern.ad/signpdf/index.jsp" target="_blank" rel="noopener noreferrer">Firmar Documentos</a>
         </div>
       </section>
 
@@ -416,6 +488,9 @@
 
       <footer>
         Algunos portales externos pueden requerir certificado digital, usuario registrado o JavaScript habilitado.
+        <div class="footer-attribution">
+          Made in Andorra with ❤️ by <a href="https://jmpsec.com" target="_blank" rel="noopener noreferrer">JMP SEC</a>
+        </div>
       </footer>
     </main>
   </body>
